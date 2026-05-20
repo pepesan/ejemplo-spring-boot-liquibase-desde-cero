@@ -1,0 +1,16 @@
+databaseChangeLog:
+  - changeSet:
+      id: 004-crear-indice-email
+      author: david.vaquero
+      comment: Índice en usuarios.email para acelerar búsquedas por correo electrónico
+      changes:
+        - createIndex:
+            tableName: usuarios
+            indexName: idx_usuarios_email
+            columns:
+              - column:
+                  name: email
+      rollback:
+        - dropIndex:
+            tableName: usuarios
+            indexName: idx_usuarios_email

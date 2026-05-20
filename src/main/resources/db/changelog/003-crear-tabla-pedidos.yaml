@@ -1,0 +1,46 @@
+databaseChangeLog:
+  - changeSet:
+      id: 003-crear-tabla-pedidos
+      author: david.vaquero
+      comment: Creación de la tabla pedidos con clave foránea a usuarios
+      preConditions:
+        - onFail: HALT
+          onFailMessage: "La tabla 'usuarios' debe existir antes de crear 'pedidos'"
+        - tableExists:
+            tableName: usuarios
+      changes:
+        - createTable:
+            tableName: pedidos
+            columns:
+              - column:
+                  name: id
+                  type: BIGINT
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: descripcion
+                  type: VARCHAR(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: total
+                  type: DECIMAL(10,2)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: usuario_id
+                  type: BIGINT
+                  constraints:
+                    nullable: false
+        - addForeignKeyConstraint:
+            baseTableName: pedidos
+            baseColumnNames: usuario_id
+            referencedTableName: usuarios
+            referencedColumnNames: id
+            constraintName: fk_pedidos_usuario
+            onDelete: CASCADE
+      rollback:
+        - dropTable:
+            tableName: pedidos

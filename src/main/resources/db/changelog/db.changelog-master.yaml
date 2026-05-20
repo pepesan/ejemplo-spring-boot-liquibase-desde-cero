@@ -1,0 +1,26 @@
+databaseChangeLog:
+  - include:
+      file: db/changelog/001-crear-tabla-usuarios.yaml
+  - include:
+      file: db/changelog/002-anadir-columna-email.yaml  # ← NUEVO
+  # ← NUEVO: etiqueta de versión inline en el master
+  - changeSet:
+      id: tag-v1.0
+      author: david.vaquero
+      comment: Esquema básico de usuarios operativo
+      changes:
+        - tagDatabase:
+            tag: v1.0
+  - include:
+      file: db/changelog/003-crear-tabla-pedidos.yaml
+  - include:
+      file: db/changelog/004-crear-indice-email.yaml
+
+  # Etiqueta v2.0: esquema completo con pedidos y optimizaciones
+  - changeSet:
+      id: tag-v2.0
+      author: david.vaquero
+      comment: Marca la versión v2.0 — esquema completo con pedidos, índices y columna fecha_creacion
+      changes:
+        - tagDatabase:
+            tag: v2.0

@@ -1,0 +1,24 @@
+databaseChangeLog:
+  - changeSet:
+      id: 001-crear-tabla-usuarios
+      author: david.vaquero
+      comment: Creación de la tabla inicial de usuarios
+      changes:
+        - createTable:
+            tableName: usuarios
+            columns:
+              - column:
+                  name: id
+                  type: BIGINT
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: nombre
+                  type: VARCHAR(100)
+                  constraints:
+                    nullable: false
+      rollback:
+        - dropTable:
+            tableName: usuarios

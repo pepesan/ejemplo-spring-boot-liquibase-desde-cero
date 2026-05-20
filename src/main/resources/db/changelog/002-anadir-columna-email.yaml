@@ -1,0 +1,31 @@
+# 002-anadir-columna-email.yaml
+databaseChangeLog:
+  - changeSet:
+      id: 002-anadir-columna-email
+      author: david.vaquero
+      preConditions:
+        - onFail: HALT
+          onFailMessage: "La tabla 'usuarios' debe existir"
+        - tableExists:
+            tableName: usuarios
+      changes:
+        - addColumn:
+            tableName: usuarios
+            columns:
+              - column:
+                  name: email
+                  type: VARCHAR(255)
+                  defaultValue: "pendiente@actualizar.com"
+                  constraints:
+                    nullable: false
+        - addUniqueConstraint:
+            tableName: usuarios
+            columnNames: email
+            constraintName: uq_usuarios_email
+      rollback:
+        - dropUniqueConstraint:
+            tableName: usuarios
+            constraintName: uq_usuarios_email
+        - dropColumn:
+            tableName: usuarios
+            columnName: email
