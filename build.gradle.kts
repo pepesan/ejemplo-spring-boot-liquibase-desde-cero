@@ -10,7 +10,7 @@ description = "ejemplo-spring-boot-liquibase-desde-cero"
 
 java {
     toolchain {
-        languageVersion = JavaLanguageVersion.of(17)
+        languageVersion = JavaLanguageVersion.of(25)
     }
 }
 
