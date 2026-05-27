@@ -84,6 +84,8 @@ Consola H2 disponible en: `http://localhost:8080/h2-console`
 
 ## Tareas Liquibase desde Gradle
 
+> **Importante:** estas tareas acceden directamente al fichero H2 en disco. Deben ejecutarse con la aplicación **parada**; si Spring Boot está arrancado, H2 tiene bloqueado el fichero y los comandos fallarán.
+
 El proyecto incluye tareas Gradle para ejecutar la CLI de Liquibase directamente:
 
 ```bash
